@@ -24,5 +24,12 @@ dist-ssr/
 *.sln
 *.sw?
 
-# Vercel
+# Vercel & Build
 .vercel
+dist/
+dist-ssr/
+
+# Heavy video files
+Fusion5_POV_Videos/
+*.mp4
+
