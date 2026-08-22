@@ -61,19 +61,10 @@ export default function Navbar({ activeTab, setActiveTab, isDualMode, setIsDualM
           })}
         </div>
 
-        {/* ─── RIGHT CONTROLS: DUAL MODE + CONNECTION ─── */}
+        {/* ─── RIGHT CONTROLS: WI-FI CONNECTION STATUS ─── */}
         <div className="pointer-events-auto flex items-center gap-2">
-          {/* Dual 2x1 Mode Pill */}
-          <button
-            onClick={() => setIsDualMode(!isDualMode)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#070c1e]/90 border border-slate-800 text-slate-300 hover:border-cyan-400 transition-all backdrop-blur-xl shadow-lg"
-          >
-            <Layers className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="hidden sm:inline">{isDualMode ? 'Dual 2×1' : 'Single'}</span>
-          </button>
-
           {/* Wi-Fi Indicator Pill */}
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#070c1e]/90 border border-slate-800 text-xs text-slate-400 backdrop-blur-xl">
+          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#070c1e]/90 border border-slate-800 text-xs text-slate-400 backdrop-blur-xl shadow-lg">
             <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-emerald-400 animate-ping' : 'bg-amber-400'}`}></span>
             <Wifi className="w-3.5 h-3.5" />
             <span className="font-mono text-[10px] text-slate-300 font-semibold">
