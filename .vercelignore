@@ -1,0 +1,8 @@
+# Ignore heavy source images/videos for fast Vercel CLI upload
+Fusion5_POV_Images/
+Fusion5_POV_Videos/
+overlap/
+single/
+hologram_motor_controller/
+*.bmp
+*.mp4

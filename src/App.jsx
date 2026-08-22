@@ -10,7 +10,6 @@ import CodeExplorer from './components/CodeExplorer';
 import TeamSection from './components/TeamSection';
 import ParticleField from './components/ParticleField';
 import FloatingGeo from './components/FloatingGeo';
-import AdaptiveCursor from './components/AdaptiveCursor';
 import { IMAGE_PRESETS } from './data/presetData';
 
 export default function App() {
@@ -27,9 +26,6 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen flex flex-col bg-[#030712] text-slate-100 selection:bg-cyan-500 selection:text-black overflow-x-hidden">
-      {/* Invisigrid Custom Adaptive Cursor System */}
-      <AdaptiveCursor />
-
       {/* Invisigrid Ambient Particle Field & Floating Geo Wireframe Background */}
       <ParticleField />
       <FloatingGeo />
