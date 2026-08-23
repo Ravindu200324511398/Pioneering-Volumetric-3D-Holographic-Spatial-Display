@@ -34,17 +34,17 @@ export default function HeroSection({
                 / fusion5_array [live]
               </div>
 
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-cyan-300 backdrop-blur">
+              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-cyan-300 backdrop-blur">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
                 Constellation Engine
               </span>
 
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-purple-300 backdrop-blur">
+              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-purple-300 backdrop-blur">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-purple-400 animate-pulse"></span>
                 60 Rows × 100 LEDs
               </span>
 
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-emerald-300 backdrop-blur">
+              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-emerald-300 backdrop-blur">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 Sonar Shield Active
               </span>
