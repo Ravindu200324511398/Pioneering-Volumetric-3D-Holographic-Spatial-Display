@@ -96,14 +96,14 @@ export default function TeamSection() {
         </div>
 
         {/* Stats Badge */}
-        <div className="flex items-center gap-3 bg-[#070c1e]/90 p-3 rounded-2xl border border-cyan-500/30 backdrop-blur-xl">
-          <div className="px-4 py-2 rounded-xl bg-cyan-500/10 border border-cyan-400/40 text-center">
-            <span className="block text-xl font-extrabold text-cyan-300 font-mono">5</span>
-            <span className="text-[10px] text-slate-400 font-mono uppercase">Engineers</span>
+        <div className="grid grid-cols-2 gap-3 w-full sm:w-auto bg-[#070c1e]/90 p-3 rounded-2xl border border-cyan-500/30 backdrop-blur-xl shrink-0">
+          <div className="px-5 py-2.5 rounded-xl bg-cyan-500/10 border border-cyan-400/40 text-center flex flex-col items-center justify-center">
+            <span className="block text-xl sm:text-2xl font-black text-cyan-300 font-mono">5</span>
+            <span className="text-[10px] text-slate-400 font-mono uppercase tracking-wider font-semibold">Engineers</span>
           </div>
-          <div className="px-4 py-2 rounded-xl bg-purple-500/10 border border-purple-400/40 text-center">
-            <span className="block text-xl font-extrabold text-purple-300 font-mono">2×1</span>
-            <span className="text-[10px] text-slate-400 font-mono uppercase">Dual Rig</span>
+          <div className="px-5 py-2.5 rounded-xl bg-purple-500/10 border border-purple-400/40 text-center flex flex-col items-center justify-center">
+            <span className="block text-xl sm:text-2xl font-black text-purple-300 font-mono">2×1</span>
+            <span className="text-[10px] text-slate-400 font-mono uppercase tracking-wider font-semibold">Dual Rig</span>
           </div>
         </div>
       </div>
