@@ -159,12 +159,12 @@ export default function TeamSection() {
 
       {/* ─── SECTION 1: FINAL PROJECT EVALUATION GROUP SHOWCASE (2 PHOTOS) ─── */}
       <div className="space-y-6">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-          <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2.5">
-            <Award className="w-5 h-5 text-cyan-400" />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 border-b border-slate-800 pb-3">
+          <h3 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2.5">
+            <Award className="w-5 h-5 text-cyan-400 shrink-0" />
             <span>Final Evaluation Showcase • Group Photographs</span>
           </h3>
-          <span className="text-xs font-mono text-cyan-300 font-bold bg-cyan-950 px-3 py-1 rounded-full border border-cyan-500/40">
+          <span className="self-start sm:self-auto text-xs font-mono text-cyan-300 font-bold bg-cyan-950 px-3 py-1 rounded-full border border-cyan-500/40 whitespace-nowrap shrink-0">
             2 Evaluation Photos
           </span>
         </div>
@@ -201,14 +201,14 @@ export default function TeamSection() {
         </div>
       </div>
 
-      {/* ─── SECTION 2: 5 INDIVIDUAL TEAM MEMBERS (RAVINDU, RANIRU, NESANDU, PAWANI, JANANI) ─── */}
+      {/* ─── SECTION 2: 5 INDIVIDUAL TEAM MEMBERS (RANIRU, RAVINDU, NESANDU, PAVANI, JANANI) ─── */}
       <div className="space-y-6">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-          <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2.5">
-            <Users className="w-5 h-5 text-purple-400" />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 border-b border-slate-800 pb-3">
+          <h3 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2.5">
+            <Users className="w-5 h-5 text-purple-400 shrink-0" />
             <span>FUSION 5 Project Team Members</span>
           </h3>
-          <span className="text-xs font-mono text-purple-300 font-bold bg-purple-950 px-3 py-1 rounded-full border border-purple-500/40">
+          <span className="self-start sm:self-auto text-xs font-mono text-purple-300 font-bold bg-purple-950 px-3 py-1 rounded-full border border-purple-500/40 whitespace-nowrap shrink-0">
             5 Engineers
           </span>
         </div>
