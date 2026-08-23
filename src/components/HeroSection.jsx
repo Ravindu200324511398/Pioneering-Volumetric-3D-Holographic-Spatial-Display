@@ -25,29 +25,33 @@ export default function HeroSection({
           <div className="lg:col-span-6 space-y-6">
             
             {/* Inline Spatial Feature Pill Bar (Clean Flow, Zero Overlap) */}
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 bg-cyan-950/40 px-3.5 py-1.5 text-xs font-mono text-cyan-300 backdrop-blur shadow-[0_0_15px_rgba(0,243,255,0.2)]">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
-                </span>
-                / fusion5_array [live]
+            <div className="space-y-2.5">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 bg-cyan-950/40 px-3.5 py-1.5 text-xs font-mono text-cyan-300 backdrop-blur shadow-[0_0_15px_rgba(0,243,255,0.2)]">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75"></span>
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
+                  </span>
+                  / fusion5_array [live]
+                </div>
               </div>
 
-              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-cyan-300 backdrop-blur">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                Constellation Engine
-              </span>
+              <div className="hidden sm:flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-cyan-300 backdrop-blur">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                  Constellation Engine
+                </span>
 
-              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-purple-300 backdrop-blur">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-purple-400 animate-pulse"></span>
-                60 Rows × 100 LEDs
-              </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-purple-300 backdrop-blur">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+                  60 Rows × 100 LEDs
+                </span>
 
-              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-emerald-300 backdrop-blur">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                Sonar Shield Active
-              </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-[#030714]/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-emerald-300 backdrop-blur">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Sonar Shield Active
+                </span>
+              </div>
             </div>
 
             {/* Kinetic Typography Headline */}
