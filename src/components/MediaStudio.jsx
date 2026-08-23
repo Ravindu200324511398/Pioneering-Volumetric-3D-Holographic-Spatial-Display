@@ -12,7 +12,16 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
   const [saturation, setSaturation] = useState(100);
   
   // Custom Text State
+  const FONT_OPTIONS = [
+    { id: 'orbitron', name: 'Orbitron', family: "'Orbitron', sans-serif" },
+    { id: 'outfit', name: 'Outfit', family: "'Outfit', sans-serif" },
+    { id: 'mono', name: 'JetBrains Mono', family: "'JetBrains Mono', monospace" },
+    { id: 'russo', name: 'Russo One', family: "'Russo One', sans-serif" },
+    { id: 'cinzel', name: 'Cinzel', family: "'Cinzel', serif" },
+  ];
+
   const [customText, setCustomText] = useState('FUSION 5 • UOM FIT');
+  const [fontFamily, setFontFamily] = useState("'Orbitron', sans-serif");
   const [textColor, setTextColor] = useState('#00f3ff');
   const [textSize, setTextSize] = useState(36);
   const [textSpeed, setTextSpeed] = useState(5);
@@ -137,7 +146,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       ctx.shadowColor = textColor;
       ctx.shadowBlur = 20;
       ctx.fillStyle = textColor;
-      ctx.font = `900 ${textSize}px "Outfit", sans-serif`;
+      ctx.font = `900 ${textSize}px ${fontFamily}`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
@@ -152,7 +161,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
 
       drawGreenBoundaries(ctx, cw, ch);
     }
-  }, [selectedImageSrc, configMode, imageScale, saturation, centerDistance, sourceMode, currentTime, clockFormat, clockTheme, customText, textColor, textSize]);
+  }, [selectedImageSrc, configMode, imageScale, saturation, centerDistance, sourceMode, currentTime, clockFormat, clockTheme, customText, fontFamily, textColor, textSize]);
 
   const drawGreenBoundaries = (ctx, cw, ch) => {
     ctx.strokeStyle = '#22c55e'; // Vibrant neon green line
@@ -398,6 +407,27 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
                   placeholder="Enter hologram text..."
                   className="w-full bg-slate-950 border border-emerald-500/40 rounded-2xl px-4 py-3 text-slate-100 font-bold text-sm focus:outline-none focus:border-emerald-400 font-mono"
                 />
+              </div>
+
+              {/* Font Family Selector */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">Font Style Family</label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {FONT_OPTIONS.map((f) => (
+                    <button
+                      key={f.id}
+                      onClick={() => setFontFamily(f.family)}
+                      style={{ fontFamily: f.family }}
+                      className={`py-2 px-2.5 rounded-xl text-xs font-bold transition-all border text-center truncate ${
+                        fontFamily === f.family
+                          ? 'border-emerald-400 bg-emerald-950/80 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] scale-102'
+                          : 'border-slate-800 bg-[#050814] text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                      }`}
+                    >
+                      {f.name}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <div className="space-y-2">
