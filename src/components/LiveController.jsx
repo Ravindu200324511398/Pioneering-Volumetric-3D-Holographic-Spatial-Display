@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Sliders, Power, Sun, RefreshCw, RotateCcw, Play, Pause, SkipForward, SkipBack,
-  Wifi, Send, CheckCircle2, AlertCircle, ShieldAlert, Cpu, Layers, Gauge, ShieldCheck, Zap, AlertTriangle, Disc, Radio
+  Wifi, Send, CheckCircle2, AlertCircle, ShieldAlert, Cpu, Layers, Gauge, ShieldCheck, Zap, AlertTriangle, Disc, Radio, Activity
 } from 'lucide-react';
 import { IMAGE_PRESETS } from '../data/presetData';
 
@@ -74,85 +74,99 @@ export default function LiveController({
   const isSafe = safetyOverride || (masterSensorsOn && sensor1Dist >= threshold1 && sensor2Dist >= threshold2 && sensor3Dist >= threshold3);
 
   return (
-    <section className="py-8 px-4 lg:px-8 max-w-6xl mx-auto space-y-6">
-      {/* ─── TOP HEADER CARD ─── */}
-      <div className="glass-card p-5 rounded-3xl flex flex-wrap items-center justify-between gap-4 border border-slate-800 bg-[#090d21]/90 shadow-[0_0_40px_rgba(0,0,0,0.6)]">
-        <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-            <Disc className="w-6 h-6 animate-spin-slow" />
+    <section className="py-8 px-4 lg:px-8 max-w-6xl mx-auto space-y-8">
+      {/* ─── TOP HEADER COMMAND CARD ─── */}
+      <div className="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-r from-[#070c1e]/95 via-[#0a132e]/95 to-[#050917]/95 p-6 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,243,255,0.15)] flex flex-wrap items-center justify-between gap-4">
+        <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-r from-cyan-500/10 via-transparent to-purple-500/10 opacity-50"></div>
+        
+        <div className="flex items-center gap-4 relative z-10">
+          <div className="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-400/40 text-cyan-400 shadow-[0_0_20px_rgba(0,243,255,0.3)]">
+            <Disc className="w-7 h-7 animate-spin-slow" />
           </div>
-          <div>
-            <h2 className="text-lg font-extrabold text-slate-100 uppercase tracking-wider">
-              HOLOGRAM MOTOR CONTROLLER
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-[10px] font-mono text-cyan-300 font-bold">
+              <span>● ESP32 REALTIME TELEMETRY</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-cyan-200 to-cyan-400">
+              FUSION 5 LIVE MOTOR CONTROLLER
             </h2>
-            <p className="text-xs text-slate-400 font-mono">FUSION5 • ESP32 LIVE DASHBOARD</p>
           </div>
         </div>
 
         <button
           onClick={() => setIsConnected(!isConnected)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all border ${
+          className={`relative z-10 flex items-center gap-2.5 px-5 py-2.5 rounded-2xl text-xs font-bold font-mono transition-all duration-300 border ${
             isConnected
-              ? 'bg-emerald-950/80 border-emerald-500/40 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
-              : 'bg-red-950/80 border-red-500/40 text-red-300 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+              ? 'bg-emerald-950/80 border-emerald-400/50 text-emerald-300 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:bg-emerald-900/80'
+              : 'bg-red-950/80 border-red-500/50 text-red-300 shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:bg-red-900/80'
           }`}
         >
-          <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-emerald-400 animate-ping' : 'bg-red-500'}`}></span>
-          <span>{isConnected ? 'Connected (ws://192.168.4.1/ws)' : 'Disconnected'}</span>
+          <span className={`w-2.5 h-2.5 rounded-full ${isConnected ? 'bg-emerald-400 animate-ping' : 'bg-red-500'}`}></span>
+          <span>{isConnected ? 'Connected • ws://192.168.4.1/ws' : 'Disconnected (Simulated)'}</span>
         </button>
       </div>
 
       {/* ─── SAFETY STATUS BANNER ─── */}
-      <div className={`p-4 rounded-2xl flex flex-wrap items-center justify-between gap-4 border transition-all ${
+      <div className={`relative overflow-hidden rounded-3xl p-5 border backdrop-blur-2xl transition-all duration-500 flex flex-wrap items-center justify-between gap-4 shadow-xl ${
         isSafe
-          ? 'bg-[#052e16]/90 border-emerald-500/40 text-emerald-200'
-          : 'bg-[#450a0a]/90 border-red-500/50 text-red-200 shadow-[0_0_25px_rgba(239,68,68,0.4)]'
+          ? 'bg-gradient-to-r from-[#032014]/90 via-[#052e16]/90 to-[#02170e]/90 border-emerald-500/40 text-emerald-200'
+          : 'bg-gradient-to-r from-[#3b0707]/95 via-[#450a0a]/95 to-[#240303]/95 border-red-500/60 text-red-100 shadow-[0_0_35px_rgba(239,68,68,0.4)] animate-pulse'
       }`}>
-        <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-xl ${isSafe ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}`}>
-            {isSafe ? <CheckCircle2 className="w-5 h-5" /> : <AlertTriangle className="w-5 h-5 animate-bounce" />}
+        <div className="flex items-center gap-4 relative z-10">
+          <div className={`p-3 rounded-2xl ${isSafe ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-red-500/20 text-red-400 border border-red-500/40'}`}>
+            {isSafe ? <CheckCircle2 className="w-6 h-6" /> : <AlertTriangle className="w-6 h-6 animate-bounce" />}
           </div>
           <div>
-            <p className="text-xs font-bold">
-              {isSafe ? 'Safe to Start' : 'OBSTRUCTION DETECTED — EMERGENCY STOP'}
-            </p>
-            <p className="text-[11px] text-slate-300">
-              {isSafe ? 'All sensors clear — no objects within detection range' : 'Object breached perimeter threshold! Motor power cut.'}
+            <h3 className="text-sm font-extrabold tracking-wide uppercase">
+              {isSafe ? 'Perimeter Safe — All Sonar Sensors Clear' : 'OBSTRUCTION DETECTED — EMERGENCY STOP CUTOFF ACTIVE'}
+            </h3>
+            <p className="text-xs text-slate-300 pt-0.5">
+              {isSafe ? 'All 3 ultrasonic safety posts clear — ready for high-speed PWM spin' : 'Perimeter clearance breached! 50Hz PWM signal pulled to 1000µs zero throttle.'}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <span className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase ${
-            safetyOverride ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-slate-900/80 text-slate-400 border border-slate-800'
+        <div className="flex items-center gap-3 relative z-10">
+          <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase border ${
+            safetyOverride ? 'bg-amber-950/90 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.3)]' : 'bg-slate-950/80 text-slate-400 border-slate-800'
           }`}>
             {safetyOverride ? 'OVERRIDE ON' : 'OVERRIDE OFF'}
           </span>
 
           <button
             onClick={() => setSafetyOverride(!safetyOverride)}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-bold text-amber-400 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-950 hover:bg-slate-900 border border-amber-500/40 text-xs font-bold text-amber-400 shadow-md transition-all hover:border-amber-400"
           >
-            <Zap className="w-3.5 h-3.5" />
+            <Zap className="w-4 h-4" />
             <span>Override Safety</span>
           </button>
         </div>
       </div>
 
-      {/* ─── THROTTLE SLIDER CARD ─── */}
-      <div className="glass-card p-6 rounded-3xl space-y-4 border border-slate-800 bg-[#090d21]/90">
-        <div className="flex items-center justify-between text-xs font-semibold text-slate-400">
-          <span className="flex items-center gap-2 text-cyan-300 font-bold uppercase tracking-wider">
-            <Zap className="w-4 h-4 text-cyan-400" />
-            THROTTLE — BOTH FANS
+      {/* ─── THROTTLE SLIDER BENTO CARD ─── */}
+      <div className="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-[#080d24]/95 via-[#050817]/95 to-[#02040b]/95 p-7 backdrop-blur-2xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5 text-cyan-300 font-bold uppercase tracking-wider text-sm">
+            <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-400/30 text-cyan-400">
+              <Zap className="w-4 h-4" />
+            </div>
+            <span>MASTER THROTTLE CONTROLLER • DUAL ESC</span>
+          </div>
+          <span className="font-mono text-cyan-400 font-black text-lg px-3 py-1 rounded-xl bg-cyan-950/80 border border-cyan-500/40">
+            {bothThrottle}%
           </span>
-          <span className="font-mono text-cyan-400 font-extrabold text-sm">{bothThrottle}%</span>
         </div>
 
-        <div className="space-y-2">
-          <div className="text-4xl font-extrabold font-mono text-slate-100 flex items-baseline gap-1">
-            <span>{bothThrottle}</span>
-            <span className="text-xl text-cyan-400">%</span>
+        <div className="space-y-4">
+          <div className="flex items-baseline justify-between">
+            <div className="text-5xl font-black font-mono text-slate-100 flex items-baseline gap-2">
+              <span>{bothThrottle}</span>
+              <span className="text-2xl text-cyan-400 font-bold">%</span>
+            </div>
+            <div className="text-right font-mono text-xs text-slate-400">
+              <span>Target Output: </span>
+              <span className="text-cyan-300 font-bold">{Math.round(600 + (bothThrottle / 100) * 3000)} RPM</span>
+            </div>
           </div>
 
           <input
@@ -161,119 +175,124 @@ export default function LiveController({
             max="100"
             value={bothThrottle}
             onChange={(e) => handleThrottleChange(Number(e.target.value))}
-            className="w-full accent-cyan-400 h-2 bg-slate-950 rounded-lg cursor-pointer"
+            className="w-full accent-cyan-400 h-3 bg-slate-950 rounded-xl cursor-pointer shadow-inner"
           />
 
-          <div className="flex justify-between text-[10px] text-slate-500 font-mono">
-            <span>0%</span>
+          <div className="flex justify-between text-[11px] text-slate-400 font-mono font-bold px-1">
+            <span>0% (1000µs)</span>
             <span>25%</span>
             <span>50%</span>
             <span>75%</span>
-            <span>100%</span>
+            <span>100% (2000µs)</span>
           </div>
         </div>
       </div>
 
-      {/* ─── MASTER FAN CONTROL BUTTONS ─── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* ─── MASTER FAN CONTROL ACTION BUTTONS ─── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <button
           onClick={handleStartBoth}
-          className="py-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:brightness-110 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(99,102,241,0.4)] transition-all uppercase tracking-wider"
+          className="group relative overflow-hidden py-5 rounded-3xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:brightness-110 text-white font-extrabold text-sm flex items-center justify-center gap-3 shadow-[0_0_35px_rgba(0,243,255,0.35)] transition-all duration-300 uppercase tracking-wider border border-cyan-400/40 active:scale-[0.98]"
         >
-          <Play className="w-4 h-4 fill-current" />
-          <span>START BOTH FANS</span>
+          <Play className="w-5 h-5 fill-current text-white group-hover:scale-110 transition-transform" />
+          <span>START BOTH FANS (75% THROTTLE)</span>
         </button>
 
         <button
           onClick={handleStopBoth}
-          className="py-4 rounded-2xl bg-[#881337] hover:bg-[#9f1239] text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(136,19,55,0.4)] transition-all uppercase tracking-wider"
+          className="group relative overflow-hidden py-5 rounded-3xl bg-gradient-to-r from-red-600 via-rose-700 to-red-800 hover:brightness-110 text-white font-extrabold text-sm flex items-center justify-center gap-3 shadow-[0_0_35px_rgba(239,68,68,0.35)] transition-all duration-300 uppercase tracking-wider border border-red-400/40 active:scale-[0.98]"
         >
-          <Power className="w-4 h-4" />
-          <span>STOP BOTH FANS</span>
+          <Power className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+          <span>STOP BOTH FANS (EMERGENCY CUTOFF)</span>
         </button>
       </div>
 
-      {/* ─── INDIVIDUAL FAN CARDS ─── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* ─── INDIVIDUAL FAN CONTROLS ─── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
         {/* Fan 1 Card */}
-        <div className="glass-card p-5 rounded-3xl space-y-4 border border-slate-800 bg-[#090d21]/90">
+        <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-[#070c1e]/90 p-6 backdrop-blur-2xl space-y-5 shadow-lg hover:border-cyan-500/50 transition-all">
           <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                <Disc className="w-4 h-4 text-cyan-400" />
-                <span>Fan 1 — ESC Pin 18</span>
+            <div className="space-y-1">
+              <h3 className="text-base font-extrabold text-slate-100 flex items-center gap-2.5">
+                <Disc className="w-5 h-5 text-cyan-400 animate-spin-slow" />
+                <span>Fan 1 • Upper Rotor</span>
               </h3>
-              <p className="text-[11px] text-slate-400 font-mono">
-                {fan1Running ? '● Running (PWM Active)' : '● Stopped'}
+              <p className="text-xs text-slate-400 font-mono">
+                GPIO 18 • ESC PWM Throttle Channel
               </p>
             </div>
 
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={fan1Running}
-                onChange={() => setFan1Running(!fan1Running)}
-                className="sr-only peer"
-              />
-              <div className="w-11 h-6 bg-slate-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
-            </label>
+            <span className={`px-3 py-1 rounded-full text-[11px] font-mono font-bold border ${
+              fan1Running ? 'bg-cyan-950 text-cyan-300 border-cyan-500/50 shadow-[0_0_10px_rgba(0,243,255,0.3)]' : 'bg-slate-900 text-slate-500 border-slate-800'
+            }`}>
+              {fan1Running ? '● RUNNING' : '● STOPPED'}
+            </span>
           </div>
 
           <button
             onClick={() => setFan1Running(!fan1Running)}
-            className="w-full py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all"
+            className={`w-full py-3.5 rounded-2xl font-extrabold text-xs flex items-center justify-center gap-2 transition-all duration-300 shadow-md ${
+              fan1Running
+                ? 'bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-500/40'
+                : 'bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-black shadow-[0_0_20px_rgba(0,243,255,0.3)]'
+            }`}
           >
-            {fan1Running ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
-            <span>{fan1Running ? 'Pause Fan 1' : '► Start Fan 1'}</span>
+            {fan1Running ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
+            <span>{fan1Running ? 'Pause Fan 1 Signal' : '► Start Fan 1 Signal'}</span>
           </button>
         </div>
 
         {/* Fan 2 Card */}
-        <div className="glass-card p-5 rounded-3xl space-y-4 border border-slate-800 bg-[#090d21]/90">
+        <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-[#070c1e]/90 p-6 backdrop-blur-2xl space-y-5 shadow-lg hover:border-purple-500/50 transition-all">
           <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                <Disc className="w-4 h-4 text-purple-400" />
-                <span>Fan 2 — ESC Pin 19</span>
+            <div className="space-y-1">
+              <h3 className="text-base font-extrabold text-slate-100 flex items-center gap-2.5">
+                <Disc className="w-5 h-5 text-purple-400 animate-spin-slow" />
+                <span>Fan 2 • Lower Rotor</span>
               </h3>
-              <p className="text-[11px] text-slate-400 font-mono">
-                {fan2Running ? '● Running (PWM Active)' : '● Stopped'}
+              <p className="text-xs text-slate-400 font-mono">
+                GPIO 19 • ESC PWM Throttle Channel
               </p>
             </div>
 
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={fan2Running}
-                onChange={() => setFan2Running(!fan2Running)}
-                className="sr-only peer"
-              />
-              <div className="w-11 h-6 bg-slate-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500"></div>
-            </label>
+            <span className={`px-3 py-1 rounded-full text-[11px] font-mono font-bold border ${
+              fan2Running ? 'bg-purple-950 text-purple-300 border-purple-500/50 shadow-[0_0_10px_rgba(168,85,247,0.3)]' : 'bg-slate-900 text-slate-500 border-slate-800'
+            }`}>
+              {fan2Running ? '● RUNNING' : '● STOPPED'}
+            </span>
           </div>
 
           <button
             onClick={() => setFan2Running(!fan2Running)}
-            className="w-full py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all"
+            className={`w-full py-3.5 rounded-2xl font-extrabold text-xs flex items-center justify-center gap-2 transition-all duration-300 shadow-md ${
+              fan2Running
+                ? 'bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-500/40'
+                : 'bg-purple-600 hover:bg-purple-500 text-white font-black shadow-[0_0_20px_rgba(168,85,247,0.3)]'
+            }`}
           >
-            {fan2Running ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
-            <span>{fan2Running ? 'Pause Fan 2' : '► Start Fan 2'}</span>
+            {fan2Running ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
+            <span>{fan2Running ? 'Pause Fan 2 Signal' : '► Start Fan 2 Signal'}</span>
           </button>
         </div>
+
       </div>
 
       {/* ─── ULTRASONIC SAFETY SENSORS SECTION ─── */}
-      <div className="space-y-4 pt-4">
-        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
-          <ShieldAlert className="w-4 h-4 text-cyan-400" />
-          <span>ULTRASONIC SAFETY SENSORS</span>
-        </h3>
+      <div className="space-y-5 pt-4">
+        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h3 className="text-lg font-bold text-slate-100 flex items-center gap-2.5">
+            <ShieldAlert className="w-5 h-5 text-cyan-400" />
+            <span>ULTRASONIC SAFETY SENSOR TELEMETRY</span>
+          </h3>
+          <span className="text-xs font-mono text-slate-400">3x HC-SR04 Acoustics</span>
+        </div>
 
         {/* Master Sensors Switch */}
-        <div className="glass-card p-4 rounded-2xl flex items-center justify-between border border-slate-800 bg-[#090d21]/90">
-          <div>
-            <p className="text-xs font-bold text-slate-200">All Sensors Master Switch</p>
-            <p className="text-[11px] text-slate-400">Disable all 3 HC-SR04 sensors at once</p>
+        <div className="rounded-3xl border border-slate-800 bg-[#070c1e]/90 p-5 backdrop-blur-2xl flex items-center justify-between">
+          <div className="space-y-0.5">
+            <p className="text-sm font-bold text-slate-100">All Safety Sensors Master Guard</p>
+            <p className="text-xs text-slate-400">Enable or bypass perimeter clearance verification</p>
           </div>
 
           <label className="relative inline-flex items-center cursor-pointer">
@@ -283,116 +302,103 @@ export default function LiveController({
               onChange={() => setMasterSensorsOn(!masterSensorsOn)}
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-slate-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
+            <div className="w-12 h-6 bg-slate-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
           </label>
         </div>
 
         {/* 3 Sensor Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          
           {/* Sensor 1 */}
-          <div className="glass-card p-5 rounded-3xl space-y-3 border border-slate-800 bg-[#090d21]/90">
+          <div className="rounded-3xl border border-slate-800 bg-[#070c1e]/90 p-5 backdrop-blur-2xl space-y-4 shadow-lg hover:border-cyan-500/40 transition-all">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="text-xs font-bold text-slate-100">Sensor 1</h4>
-                <span className="text-[10px] text-slate-500 font-mono">TRIG:25 • ECHO:26</span>
+                <h4 className="text-sm font-bold text-slate-100">Sensor 01 • Left Post</h4>
+                <span className="text-[10px] text-slate-400 font-mono">TRIG:25 • ECHO:26</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">● OK</span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" checked={sensor1On} onChange={() => setSensor1On(!sensor1On)} className="sr-only peer" />
-                  <div className="w-8 h-4 bg-slate-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-indigo-500"></div>
-                </label>
-              </div>
+              <span className="px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-300 font-mono text-[10px] font-bold border border-emerald-500/40">
+                ● CLEAR
+              </span>
             </div>
 
-            <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-center font-mono">
-              <span className="text-xl font-bold text-slate-200">{sensor1Dist}</span>
-              <span className="text-xs text-slate-400 ml-1">cm</span>
+            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center font-mono space-y-1">
+              <div className="text-2xl font-black text-cyan-300">{sensor1Dist} <span className="text-xs text-slate-400">cm</span></div>
+              <div className="text-[10px] text-slate-500">Realtime Clearance Distance</div>
             </div>
 
-            <div className="flex items-center justify-between text-[11px] text-slate-400 gap-2">
-              <span>Threshold:</span>
+            <div className="flex items-center justify-between text-xs text-slate-300 pt-1">
+              <span>Cutoff Threshold:</span>
               <input
                 type="number"
                 value={threshold1}
                 onChange={(e) => setThreshold1(Number(e.target.value))}
-                className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-center font-mono text-cyan-300 text-xs"
+                className="w-16 bg-slate-950 border border-cyan-500/40 rounded-xl px-2 py-1 text-center font-mono text-cyan-300 text-xs font-bold"
               />
-              <button className="px-2 py-1 bg-slate-800 rounded-lg text-slate-300 font-bold text-[10px]">Set</button>
             </div>
           </div>
 
           {/* Sensor 2 */}
-          <div className="glass-card p-5 rounded-3xl space-y-3 border border-slate-800 bg-[#090d21]/90">
+          <div className="rounded-3xl border border-slate-800 bg-[#070c1e]/90 p-5 backdrop-blur-2xl space-y-4 shadow-lg hover:border-purple-500/40 transition-all">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="text-xs font-bold text-slate-100">Sensor 2</h4>
-                <span className="text-[10px] text-slate-500 font-mono">TRIG:27 • ECHO:14</span>
+                <h4 className="text-sm font-bold text-slate-100">Sensor 02 • Center Post</h4>
+                <span className="text-[10px] text-slate-400 font-mono">TRIG:27 • ECHO:14</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">● OK</span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" checked={sensor2On} onChange={() => setSensor2On(!sensor2On)} className="sr-only peer" />
-                  <div className="w-8 h-4 bg-slate-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-indigo-500"></div>
-                </label>
-              </div>
+              <span className="px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-300 font-mono text-[10px] font-bold border border-emerald-500/40">
+                ● CLEAR
+              </span>
             </div>
 
-            <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-center font-mono">
-              <span className="text-xl font-bold text-slate-200">{sensor2Dist}</span>
-              <span className="text-xs text-slate-400 ml-1">cm</span>
+            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center font-mono space-y-1">
+              <div className="text-2xl font-black text-purple-300">{sensor2Dist} <span className="text-xs text-slate-400">cm</span></div>
+              <div className="text-[10px] text-slate-500">Realtime Clearance Distance</div>
             </div>
 
-            <div className="flex items-center justify-between text-[11px] text-slate-400 gap-2">
-              <span>Threshold:</span>
+            <div className="flex items-center justify-between text-xs text-slate-300 pt-1">
+              <span>Cutoff Threshold:</span>
               <input
                 type="number"
                 value={threshold2}
                 onChange={(e) => setThreshold2(Number(e.target.value))}
-                className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-center font-mono text-cyan-300 text-xs"
+                className="w-16 bg-slate-950 border border-purple-500/40 rounded-xl px-2 py-1 text-center font-mono text-purple-300 text-xs font-bold"
               />
-              <button className="px-2 py-1 bg-slate-800 rounded-lg text-slate-300 font-bold text-[10px]">Set</button>
             </div>
           </div>
 
           {/* Sensor 3 */}
-          <div className="glass-card p-5 rounded-3xl space-y-3 border border-slate-800 bg-[#090d21]/90">
+          <div className="rounded-3xl border border-slate-800 bg-[#070c1e]/90 p-5 backdrop-blur-2xl space-y-4 shadow-lg hover:border-emerald-500/40 transition-all">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="text-xs font-bold text-slate-100">Sensor 3</h4>
-                <span className="text-[10px] text-slate-500 font-mono">TRIG:32 • ECHO:33</span>
+                <h4 className="text-sm font-bold text-slate-100">Sensor 03 • Right Post</h4>
+                <span className="text-[10px] text-slate-400 font-mono">TRIG:32 • ECHO:33</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">● OK</span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" checked={sensor3On} onChange={() => setSensor3On(!sensor3On)} className="sr-only peer" />
-                  <div className="w-8 h-4 bg-slate-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-indigo-500"></div>
-                </label>
-              </div>
+              <span className="px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-300 font-mono text-[10px] font-bold border border-emerald-500/40">
+                ● CLEAR
+              </span>
             </div>
 
-            <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-center font-mono">
-              <span className="text-xl font-bold text-slate-200">{sensor3Dist}</span>
-              <span className="text-xs text-slate-400 ml-1">cm</span>
+            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center font-mono space-y-1">
+              <div className="text-2xl font-black text-emerald-300">{sensor3Dist} <span className="text-xs text-slate-400">cm</span></div>
+              <div className="text-[10px] text-slate-500">Realtime Clearance Distance</div>
             </div>
 
-            <div className="flex items-center justify-between text-[11px] text-slate-400 gap-2">
-              <span>Threshold:</span>
+            <div className="flex items-center justify-between text-xs text-slate-300 pt-1">
+              <span>Cutoff Threshold:</span>
               <input
                 type="number"
                 value={threshold3}
                 onChange={(e) => setThreshold3(Number(e.target.value))}
-                className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-center font-mono text-cyan-300 text-xs"
+                className="w-16 bg-slate-950 border border-emerald-500/40 rounded-xl px-2 py-1 text-center font-mono text-emerald-300 text-xs font-bold"
               />
-              <button className="px-2 py-1 bg-slate-800 rounded-lg text-slate-300 font-bold text-[10px]">Set</button>
             </div>
           </div>
+
         </div>
       </div>
 
-      {/* ─── FOOTER BAR ─── */}
-      <div className="text-center pt-4 border-t border-slate-800 text-[10px] text-slate-500 font-mono">
-        HOLOGRAM MOTOR CONTROLLER • Fusion5 • ESP32 WebSocket Dashboard • A2212 Brushless Motors • HC-SR04 Ultrasonic Safety System
+      {/* ─── FOOTER TELEMETRY NOTE ─── */}
+      <div className="text-center pt-6 border-t border-slate-800 text-xs text-slate-400 font-mono">
+        HOLOGRAM MOTOR CONTROLLER • FUSION 5 • ESP32 WEBSOCKET ENGINE • DUAL A2212 BLDC MOTORS • TRIPLE HC-SR04 SONAR
       </div>
     </section>
   );
