@@ -217,7 +217,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
   return (
     <section className="py-8 px-4 lg:px-8 max-w-7xl mx-auto space-y-8">
       {/* ─── TOP MODE SELECTOR CARD ─── */}
-      <div className="rounded-3xl border border-cyan-500/30 bg-[#070c1e]/90 p-3 backdrop-blur-2xl grid grid-cols-3 gap-3 shadow-lg">
+      <div className="rounded-3xl border border-cyan-500/30 bg-[#070c1e]/90 p-2 sm:p-3 backdrop-blur-2xl grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 shadow-lg">
         <button
           onClick={() => setSourceMode('image')}
           className={`py-3.5 rounded-2xl text-xs font-extrabold flex items-center justify-center gap-2 transition-all duration-300 ${
