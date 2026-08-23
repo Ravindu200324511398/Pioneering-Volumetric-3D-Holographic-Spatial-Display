@@ -24,7 +24,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
   const [fontFamily, setFontFamily] = useState("'Orbitron', sans-serif");
   const [textColor, setTextColor] = useState('#00f3ff');
   const [textSize, setTextSize] = useState(36);
-  const [textScale, setTextScale] = useState(100);
+  const [textScale, setTextScale] = useState(80);
   const [textSpeed, setTextSpeed] = useState(5);
 
   // Live Clock State
@@ -39,7 +39,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
   const [clockTheme, setClockTheme] = useState('#00f3ff');
   const [clockFormat, setClockFormat] = useState('12h'); // '12h' | '24h'
   const [clockFontFamily, setClockFontFamily] = useState("'JetBrains Mono', monospace");
-  const [clockScale, setClockScale] = useState(100);
+  const [clockScale, setClockScale] = useState(80);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const [selectedImageSrc, setSelectedImageSrc] = useState(null);
