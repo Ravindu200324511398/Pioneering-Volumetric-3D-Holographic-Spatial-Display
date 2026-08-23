@@ -36,6 +36,9 @@ Traditional 2D LED fans are limited by small circular viewing boundaries and iso
 * ⚡ **50Hz ESC Pulse-Width Motor Control**: Precision servo PWM signal generation ($1000\mu\text{s} \text{ idle} \to 2000\mu\text{s} \text{ full throttle}$) regulating dual A2212 2200KV motors.
 * 🛡️ **Triple HC-SR04 Ultrasonic Sonar Safety Shield**: Time-of-flight acoustic sensors continuously monitor a 180° perimeter safety arc with sub-30ms hardware interrupt emergency motor cutoff.
 * 🎨 **Invisigrid Web Telemetry Console**: Modern glassmorphic React control application with live canvas particle backgrounds, polar matrix image conversion, 3D geometry model visualization, and firmware explorers.
+* 🕒 **Live Holographic Clock Generator**: Realtime 60 FPS ticking clock with seconds sweep hand, 12-Hour/24-Hour military formats, 5 digital number font styles (JetBrains Mono, Orbitron, Digital HUD Share Tech, Arcade VT323 Pixel, Russo Heavy), and 40%–180% display scale control.
+* 📝 **Custom Spatial Text Projection Engine**: Live mid-air text projection with 5 font style families (Orbitron Sci-Fi, Outfit Modern, JetBrains Mono Cyber, Russo Heavy Impact, Cinzel Holographic Serif), 16px–140px font size slider, and 40%–180% spatial scale control.
+* 🏛️ **Official University of Moratuwa Emblem Logo**: Bundled high-resolution crest logo asset (`uom.png`) rendering instantly on initial canvas load.
 
 ---
 
@@ -49,6 +52,7 @@ Traditional 2D LED fans are limited by small circular viewing boundaries and iso
 | **Rotor Speed** | **2400 – 3600 RPM (50Hz Frame Rate)** | Fixed 1200 RPM |
 | **Polar Resolution** | **60 Polar Sectors × 100 Radial LEDs** | 30 Sectors × 48 LEDs |
 | **Binary Buffer Format** | **12,000 Byte RGB565 Array Payload** | Proprietary Encrypted Format |
+| **Interactive Studio Modes** | **Image/Video, Live Clock & Custom Text** | Static Pre-rendered Images Only |
 | **Safety System** | **Triple HC-SR04 Ultrasonic Sonar Radar** | None / Plastic Shield Only |
 | **Control Interface** | **Open Web REST + WebSockets Console** | Windows Desktop Executable Only |
 
@@ -84,7 +88,10 @@ The web application ([https://fusion5-hologram-array-system.vercel.app](https://
 
 1. 🔬 **Lab Overview**: Real-time interactive 3D hardware rig cover presentation with cyan laser scanlines, radar overlays, and dual-fan physics breakdown.
 2. 🎛️ **Live Controller**: Cyber Command dashboard for master throttle control, individual ESC channel pulsing, safety override switches, and live ultrasonic clearance telemetry.
-3. 🎨 **Hologram Array Studio**: Live image and video upload converter transforming standard graphics into 12,000-byte RGB565 polar matrix binary streams.
+3. 🎨 **Hologram Array Studio**: Multi-mode spatial converter supporting 3 rendering suites:
+   * 🖼️ **Image & Video Mode**: Transforms graphics/GIFs into 12,000-byte RGB565 polar binary matrices with University of Moratuwa emblem logo as default asset.
+   * 🕒 **Live Hologram Clock Mode**: Realtime 60 FPS ticking clock with seconds sweep hand, 12h/24h toggle, 5 digital digit font styles (*JetBrains, Orbitron, Digital HUD, Arcade VT323, Russo Heavy*), and 40%–180% scale control.
+   * 📝 **Custom Text Mode**: Mid-air spatial text generator with 5 font style families (*Orbitron, Outfit, JetBrains Mono, Russo Heavy, Cinzel*), font size slider (16px to 140px), and spatial scale control (40% to 180%).
 4. 📐 **3D Geometry Viewer**: Interactive Three.js spatial canvas rendering mathematical wireframe models (Holographic Torus, Wireframe Cube, DNA Double Helix, Cyber Ring).
 5. ⚡ **Electronics Architecture**: Bento Circuit Grid detailing dual ESP32-S3 MCUs, APA102 LED SPI lines, A2212 motors, and HC-SR04 sonar safety.
 6. 📘 **Build Guide**: Step-by-step engineering documentation covering frame assembly, motor mounting, ESC calibration, and firmare flashing.
@@ -97,8 +104,8 @@ The web application ([https://fusion5-hologram-array-system.vercel.app](https://
 
 **Faculty of Information Technology • University of Moratuwa**
 
-* 👨‍💻 **Ravindu** — *Firmware & Embedded Systems Lead*
-* 👨‍💻 **Raniru** — *Project Lead & Hardware Systems Engineer*
+* 👨‍💻 **Raniru** — *Firmware & Embedded Systems Lead*
+* 👨‍💻 **Ravindu** — *Project Lead & Hardware Systems Engineer*
 * 👨‍🔧 **Nesandu** — *Mechanical Design & Structural Specialist*
 * 👩‍💻 **Pavani** — *Polar Matrix Algorithms & Data Engineer*
 * 👩‍🔬 **Janani** — *Perimeter Safety & Quality Assurance Lead*
