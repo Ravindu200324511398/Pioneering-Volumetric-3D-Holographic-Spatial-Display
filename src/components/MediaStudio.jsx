@@ -83,6 +83,9 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
     ctx.fillStyle = '#050917';
     ctx.fillRect(0, 0, cw, ch);
 
+    // Draw background boundary guide rings first
+    drawGreenBoundaries(ctx, cw, ch);
+
     if (sourceMode === 'image') {
       if (!selectedImageSrc) return;
       const img = new Image();
@@ -99,8 +102,6 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
 
         ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
         ctx.restore();
-
-        drawGreenBoundaries(ctx, cw, ch);
       };
     } else if (sourceMode === 'clock') {
       // 🕒 LIVE SPATIAL HOLOGRAM CLOCK RENDERER
@@ -146,8 +147,6 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       ctx.fillText(dateStr, cw / 2, ch / 2 + 30);
 
       ctx.restore();
-
-      drawGreenBoundaries(ctx, cw, ch);
     } else if (sourceMode === 'text') {
       // 📝 CUSTOM HOLOGRAM TEXT RENDERER
       ctx.save();
@@ -167,14 +166,14 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       ctx.fillText('3D SPATIAL LIGHT ARRAY', cw / 2, ch / 2 + 45);
 
       ctx.restore();
-
-      drawGreenBoundaries(ctx, cw, ch);
     }
   }, [selectedImageSrc, configMode, imageScale, saturation, centerDistance, sourceMode, currentTime, clockFormat, clockTheme, clockFontFamily, customText, fontFamily, textColor, textSize]);
 
   const drawGreenBoundaries = (ctx, cw, ch) => {
+    ctx.save();
     ctx.strokeStyle = '#22c55e'; // Vibrant neon green line
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = 0.5;
 
     if (configMode === 'single') {
       const radius = Math.min(cw, ch) * 0.38;
@@ -194,6 +193,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       ctx.arc(cw / 2, bottomCenterY, radius, 0, Math.PI * 2);
       ctx.stroke();
     }
+    ctx.restore();
   };
 
   const handleUploadToFan1 = () => {
