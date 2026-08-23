@@ -97,10 +97,10 @@ The web application ([https://fusion5-hologram-array-system.vercel.app](https://
 
 **Faculty of Information Technology • University of Moratuwa**
 
-* 👨‍💻 **Ravindu** — *Project Lead & Hardware Systems Engineer*
 * 👨‍💻 **Raniru** — *Firmware & Embedded Systems Lead*
+* 👨‍💻 **Ravindu** — *Project Lead & Hardware Systems Engineer*
 * 👨‍🔧 **Nesandu** — *Mechanical Design & Structural Specialist*
-* 👩‍💻 **Pawani** — *Polar Matrix Algorithms & Data Engineer*
+* 👩‍💻 **Pavani** — *Polar Matrix Algorithms & Data Engineer*
 * 👩‍🔬 **Janani** — *Perimeter Safety & Quality Assurance Lead*
 
 ---

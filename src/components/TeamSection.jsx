@@ -26,24 +26,24 @@ export default function TeamSection() {
     },
   ];
 
-  // 5 Individual Team Members (Ravindu, Raniru, Nesandu, Pawani, Janani)
+  // 5 Individual Team Members (Raniru, Ravindu, Nesandu, Pavani, Janani)
   const teamMembers = [
     {
       id: 'm1',
-      name: 'Ravindu',
-      role: 'Project Lead & Hardware Systems Engineer',
-      badge: 'Lead Engineer',
+      name: 'Raniru',
+      role: 'Firmware & Embedded Systems Lead',
+      badge: 'Firmware Lead',
       src: '/team/fusion5_team_member_2.jpg',
-      caption: 'Architected the 2×1 vertical overlap dual-rotor chassis, 50Hz ESC PWM motor dynamics, and live telemetry web application.',
+      caption: 'Engineered ESP32-S3 high-speed SPI rendering pipeline, sub-millisecond Hall Effect phase synchronization, and SoftAP WebSockets.',
       hasCustomImage: true
     },
     {
       id: 'm2',
-      name: 'Raniru',
-      role: 'Firmware & Embedded Systems Lead',
-      badge: 'Firmware Lead',
+      name: 'Ravindu',
+      role: 'Project Lead & Hardware Systems Engineer',
+      badge: 'Lead Engineer',
       src: '/team/fusion5_team_member_1.jpg',
-      caption: 'Engineered ESP32-S3 high-speed SPI rendering pipeline, sub-millisecond Hall Effect phase synchronization, and SoftAP WebSockets.',
+      caption: 'Architected the 2×1 vertical overlap dual-rotor chassis, 50Hz ESC PWM motor dynamics, and live telemetry web application.',
       hasCustomImage: true
     },
     {
@@ -57,7 +57,7 @@ export default function TeamSection() {
     },
     {
       id: 'm4',
-      name: 'Pawani',
+      name: 'Pavani',
       role: 'Polar Matrix Algorithms & Data Engineer',
       badge: 'Software Specialist',
       src: null,
