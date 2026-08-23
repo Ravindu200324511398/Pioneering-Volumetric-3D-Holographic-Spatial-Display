@@ -27,8 +27,17 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
   const [textSpeed, setTextSpeed] = useState(5);
 
   // Live Clock State
+  const CLOCK_FONT_OPTIONS = [
+    { id: 'jetbrains', name: 'JetBrains', family: "'JetBrains Mono', monospace" },
+    { id: 'orbitron', name: 'Orbitron', family: "'Orbitron', sans-serif" },
+    { id: 'sharetech', name: 'Digital HUD', family: "'Share Tech Mono', monospace" },
+    { id: 'vt323', name: 'Arcade VT323', family: "'VT323', monospace" },
+    { id: 'russo', name: 'Russo Heavy', family: "'Russo One', sans-serif" },
+  ];
+
   const [clockTheme, setClockTheme] = useState('#00f3ff');
   const [clockFormat, setClockFormat] = useState('12h'); // '12h' | '24h'
+  const [clockFontFamily, setClockFontFamily] = useState("'JetBrains Mono', monospace");
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const [selectedImageSrc, setSelectedImageSrc] = useState(null);
@@ -125,7 +134,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       const timeStr = `${hours}:${mins}:${secs}${ampm}`;
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 36px "JetBrains Mono", monospace';
+      ctx.font = `bold 34px ${clockFontFamily}`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(timeStr, cw / 2, ch / 2 - 10);
@@ -161,7 +170,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
 
       drawGreenBoundaries(ctx, cw, ch);
     }
-  }, [selectedImageSrc, configMode, imageScale, saturation, centerDistance, sourceMode, currentTime, clockFormat, clockTheme, customText, fontFamily, textColor, textSize]);
+  }, [selectedImageSrc, configMode, imageScale, saturation, centerDistance, sourceMode, currentTime, clockFormat, clockTheme, clockFontFamily, customText, fontFamily, textColor, textSize]);
 
   const drawGreenBoundaries = (ctx, cw, ch) => {
     ctx.strokeStyle = '#22c55e'; // Vibrant neon green line
@@ -369,6 +378,27 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
                   >
                     24-Hour Military
                   </button>
+                </div>
+              </div>
+
+              {/* Clock Number Digit Font Style Selector */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">Number Digit Font Style</label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {CLOCK_FONT_OPTIONS.map((f) => (
+                    <button
+                      key={f.id}
+                      onClick={() => setClockFontFamily(f.family)}
+                      style={{ fontFamily: f.family }}
+                      className={`py-2 px-2 rounded-xl text-xs font-bold transition-all border text-center truncate ${
+                        clockFontFamily === f.family
+                          ? 'border-purple-400 bg-purple-950/80 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.3)] scale-102'
+                          : 'border-slate-800 bg-[#050814] text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                      }`}
+                    >
+                      {f.name}
+                    </button>
+                  ))}
                 </div>
               </div>
 
