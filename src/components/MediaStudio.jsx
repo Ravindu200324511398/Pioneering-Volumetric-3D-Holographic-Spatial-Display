@@ -24,6 +24,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
   const [fontFamily, setFontFamily] = useState("'Orbitron', sans-serif");
   const [textColor, setTextColor] = useState('#00f3ff');
   const [textSize, setTextSize] = useState(36);
+  const [textScale, setTextScale] = useState(100);
   const [textSpeed, setTextSpeed] = useState(5);
 
   // Live Clock State
@@ -38,6 +39,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
   const [clockTheme, setClockTheme] = useState('#00f3ff');
   const [clockFormat, setClockFormat] = useState('12h'); // '12h' | '24h'
   const [clockFontFamily, setClockFontFamily] = useState("'JetBrains Mono', monospace");
+  const [clockScale, setClockScale] = useState(100);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const [selectedImageSrc, setSelectedImageSrc] = useState(null);
@@ -106,6 +108,9 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
     } else if (sourceMode === 'clock') {
       // 🕒 LIVE SPATIAL HOLOGRAM CLOCK RENDERER
       ctx.save();
+      ctx.translate(cw / 2, ch / 2);
+      const cScale = clockScale / 100;
+      ctx.scale(cScale, cScale);
       
       // Outer Clock Dial Ring
       ctx.strokeStyle = clockTheme;
@@ -113,15 +118,15 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       ctx.shadowColor = clockTheme;
       ctx.shadowBlur = 15;
       ctx.beginPath();
-      ctx.arc(cw / 2, ch / 2, cw * 0.38, 0, Math.PI * 2);
+      ctx.arc(0, 0, cw * 0.38, 0, Math.PI * 2);
       ctx.stroke();
 
       // Seconds Tick Sweep Hand
       const seconds = currentTime.getSeconds();
       const secAngle = (seconds / 60) * Math.PI * 2 - Math.PI / 2;
       ctx.beginPath();
-      ctx.moveTo(cw / 2, ch / 2);
-      ctx.lineTo(cw / 2 + Math.cos(secAngle) * (cw * 0.32), ch / 2 + Math.sin(secAngle) * (ch * 0.32));
+      ctx.moveTo(0, 0);
+      ctx.lineTo(Math.cos(secAngle) * (cw * 0.32), Math.sin(secAngle) * (ch * 0.32));
       ctx.stroke();
 
       // Digital Clock Time String
@@ -138,18 +143,21 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       ctx.font = `bold 34px ${clockFontFamily}`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(timeStr, cw / 2, ch / 2 - 10);
+      ctx.fillText(timeStr, 0, -10);
 
       // Date String
       const dateStr = currentTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).toUpperCase();
       ctx.fillStyle = clockTheme;
       ctx.font = 'bold 14px "Outfit", sans-serif';
-      ctx.fillText(dateStr, cw / 2, ch / 2 + 30);
+      ctx.fillText(dateStr, 0, 30);
 
       ctx.restore();
     } else if (sourceMode === 'text') {
       // 📝 CUSTOM HOLOGRAM TEXT RENDERER
       ctx.save();
+      ctx.translate(cw / 2, ch / 2);
+      const tScale = textScale / 100;
+      ctx.scale(tScale, tScale);
 
       ctx.shadowColor = textColor;
       ctx.shadowBlur = 20;
@@ -158,16 +166,16 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
-      ctx.fillText(customText || 'FUSION 5', cw / 2, ch / 2);
+      ctx.fillText(customText || 'FUSION 5', 0, 0);
 
       // Neon Sub-Text Line
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 12px "JetBrains Mono", monospace';
-      ctx.fillText('3D SPATIAL LIGHT ARRAY', cw / 2, ch / 2 + 45);
+      ctx.fillText('3D SPATIAL LIGHT ARRAY', 0, 45);
 
       ctx.restore();
     }
-  }, [selectedImageSrc, configMode, imageScale, saturation, centerDistance, sourceMode, currentTime, clockFormat, clockTheme, clockFontFamily, customText, fontFamily, textColor, textSize]);
+  }, [selectedImageSrc, configMode, imageScale, saturation, centerDistance, sourceMode, currentTime, clockFormat, clockTheme, clockFontFamily, clockScale, customText, fontFamily, textColor, textSize, textScale]);
 
   const drawGreenBoundaries = (ctx, cw, ch) => {
     ctx.save();
@@ -402,6 +410,22 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
                 </div>
               </div>
 
+              {/* Clock Scale Slider */}
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs font-bold text-slate-300">
+                  <span>Clock Display Scale</span>
+                  <span className="font-mono text-purple-400 font-extrabold px-2 py-0.5 rounded bg-purple-950 border border-purple-500/40">{clockScale}%</span>
+                </div>
+                <input
+                  type="range"
+                  min="40"
+                  max="180"
+                  value={clockScale}
+                  onChange={(e) => setClockScale(Number(e.target.value))}
+                  className="w-full accent-purple-400 h-2 bg-slate-950 rounded-lg cursor-pointer"
+                />
+              </div>
+
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">Neon Clock Color Theme</label>
                 <div className="flex items-center gap-3">
@@ -458,6 +482,22 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* Text Spatial Scale Slider */}
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs font-bold text-slate-300">
+                  <span>Text Spatial Scale</span>
+                  <span className="font-mono text-emerald-400 font-extrabold px-2 py-0.5 rounded bg-emerald-950 border border-emerald-500/40">{textScale}%</span>
+                </div>
+                <input
+                  type="range"
+                  min="40"
+                  max="180"
+                  value={textScale}
+                  onChange={(e) => setTextScale(Number(e.target.value))}
+                  className="w-full accent-emerald-400 h-2 bg-slate-950 rounded-lg cursor-pointer"
+                />
               </div>
 
               <div className="space-y-2">
