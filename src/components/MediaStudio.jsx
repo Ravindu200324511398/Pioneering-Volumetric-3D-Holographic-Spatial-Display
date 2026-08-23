@@ -137,7 +137,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       ctx.shadowColor = textColor;
       ctx.shadowBlur = 20;
       ctx.fillStyle = textColor;
-      ctx.font = `black ${textSize}px "Outfit", sans-serif`;
+      ctx.font = `900 ${textSize}px "Outfit", sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
@@ -404,8 +404,8 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
                 <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">Text Font Size ({textSize}px)</label>
                 <input
                   type="range"
-                  min="20"
-                  max="60"
+                  min="16"
+                  max="140"
                   value={textSize}
                   onChange={(e) => setTextSize(Number(e.target.value))}
                   className="w-full accent-emerald-400 h-2 bg-slate-950 rounded-lg cursor-pointer"
