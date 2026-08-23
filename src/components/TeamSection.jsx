@@ -4,50 +4,75 @@ import { Users, Award, Sparkles, Camera, Heart, CheckCircle2, ChevronRight, Uplo
 export default function TeamSection() {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
-  const teamPhotos = [
+  // 2 Group Evaluation Photos
+  const evaluationPhotos = [
     {
       id: 1,
       src: '/team/fusion5_team_group_selfie.jpg',
-      title: 'Full Engineering Team Selfie',
-      role: 'FUSION 5 Hardware & Systems Group',
-      location: 'Faculty of Information Technology Complex',
-      caption: 'The core engineering team presenting the completed 2×1 vertical dual-fan hologram array rig.',
-      badge: 'Core Team'
+      title: 'Final Project Evaluation Showcase',
+      role: 'FUSION 5 Engineering Team',
+      location: 'Faculty of Information Technology',
+      caption: 'The core engineering team presenting the functional 2×1 vertical dual-fan hologram array display during final project evaluation at the Faculty of Information Technology.',
+      badge: 'Final Evaluation'
     },
     {
       id: 2,
       src: '/team/fusion5_team_faculty_steps.jpg',
-      title: 'Faculty Steps Assembly',
-      role: 'Research & Field Calibration Team',
-      location: 'Faculty of Information Technology Steps',
-      caption: 'Team members seated at the FIT entrance steps during final ultrasonic sonar perimeter safety testing.',
-      badge: 'FIT Campus'
-    },
-    {
-      id: 3,
-      src: '/team/fusion5_team_member_1.jpg',
-      title: 'Hardware Chassis Specialist',
-      role: 'Aluminium Extrusion & Structural Rig',
-      location: 'FIT Engineering Complex',
-      caption: 'Standing proudly beside the vertical aluminium spine and dual A2212 motor mounting plates.',
-      badge: 'Hardware Rig'
-    },
-    {
-      id: 4,
-      src: '/team/fusion5_team_member_2.jpg',
-      title: 'Firmware & ESC Electronics Lead',
-      role: 'Embedded Systems & SoftAP Engineer',
-      location: 'FIT Engineering Complex',
-      caption: 'Testing the 50Hz PWM ESC throttle curves and ESP32-S3 high-speed SPI rendering pipeline.',
-      badge: 'Embedded Lead'
+      title: 'FIT Entrance Steps Showcase',
+      role: 'Faculty of Information Technology Team',
+      location: 'FIT Entrance Steps',
+      caption: 'Team members gathered at the FIT entrance steps following successful live hardware demonstration and safety evaluation.',
+      badge: 'Evaluation Day'
     },
   ];
 
-  // 3 Reserved slots for upcoming user uploads
-  const reservedSlots = [
-    { slotNum: 5, title: 'Team Photo Slot 05', hint: 'Reserved for upcoming team photograph' },
-    { slotNum: 6, title: 'Team Photo Slot 06', hint: 'Reserved for upcoming team photograph' },
-    { slotNum: 7, title: 'Team Photo Slot 07', hint: 'Reserved for upcoming team photograph' },
+  // 5 Individual Team Members (Ravindu, Raniru, Nesandu, Pawani, Janani)
+  const teamMembers = [
+    {
+      id: 'm1',
+      name: 'Ravindu',
+      role: 'Project Lead & Hardware Systems Engineer',
+      badge: 'Lead Engineer',
+      src: '/team/fusion5_team_member_2.jpg',
+      caption: 'Architected the 2×1 vertical overlap dual-rotor chassis, 50Hz ESC PWM motor dynamics, and live telemetry web application.',
+      hasCustomImage: true
+    },
+    {
+      id: 'm2',
+      name: 'Raniru',
+      role: 'Firmware & Embedded Systems Lead',
+      badge: 'Firmware Lead',
+      src: '/team/fusion5_team_member_1.jpg',
+      caption: 'Engineered ESP32-S3 high-speed SPI rendering pipeline, sub-millisecond Hall Effect phase synchronization, and SoftAP WebSockets.',
+      hasCustomImage: true
+    },
+    {
+      id: 'm3',
+      name: 'Nesandu',
+      role: 'Mechanical Design & Structural Specialist',
+      badge: 'Mechanical Lead',
+      src: null,
+      caption: 'Designed the vertical aluminium extrusion spine, dual A2212 motor mounting plates, and 3x sonar sensor safety posts.',
+      hasCustomImage: false
+    },
+    {
+      id: 'm4',
+      name: 'Pawani',
+      role: 'Polar Matrix Algorithms & Data Engineer',
+      badge: 'Software Specialist',
+      src: null,
+      caption: 'Developed Cartesian-to-Polar coordinate matrix transformation algorithms and 12,000-byte RGB565 binary buffer generators.',
+      hasCustomImage: false
+    },
+    {
+      id: 'm5',
+      name: 'Janani',
+      role: 'Perimeter Safety & Quality Assurance Lead',
+      badge: 'Safety & QA Lead',
+      src: null,
+      caption: 'Engineered triple HC-SR04 ultrasonic sonar time-of-flight acoustic safety monitoring and automated emergency cutoff routines.',
+      hasCustomImage: false
+    },
   ];
 
   return (
@@ -132,70 +157,110 @@ export default function TeamSection() {
         </div>
       </div>
 
-      {/* ─── TEAM GALLERY GRID (CURRENT PHOTOS + 3 RESERVED UPLOAD SLOTS) ─── */}
+      {/* ─── SECTION 1: FINAL PROJECT EVALUATION GROUP SHOWCASE (2 PHOTOS) ─── */}
       <div className="space-y-6">
         <div className="flex items-center justify-between border-b border-slate-800 pb-3">
           <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2.5">
-            <Camera className="w-5 h-5 text-cyan-400" />
-            <span>Team Field Gallery & Hardware Showcase</span>
+            <Award className="w-5 h-5 text-cyan-400" />
+            <span>Final Evaluation Showcase • Group Photographs</span>
           </h3>
-          <span className="text-xs font-mono text-slate-400">4 Active Photos + 3 Reserved Slots</span>
+          <span className="text-xs font-mono text-cyan-300 font-bold bg-cyan-950 px-3 py-1 rounded-full border border-cyan-500/40">
+            2 Evaluation Photos
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          {/* Active Photos Cards */}
-          {teamPhotos.map((photo) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {evaluationPhotos.map((photo) => (
             <div
               key={photo.id}
               onClick={() => setSelectedPhoto(photo)}
-              className="group relative overflow-hidden rounded-3xl border border-slate-800 bg-[#070c1e]/90 backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1.5 hover:border-cyan-400/80 hover:shadow-[0_15px_35px_rgba(0,243,255,0.2)] cursor-pointer flex flex-col justify-between"
+              className="group relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-[#070c1e]/90 backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1.5 hover:border-cyan-400 hover:shadow-[0_15px_35px_rgba(0,243,255,0.2)] cursor-pointer flex flex-col justify-between"
             >
-              <div className="relative h-64 overflow-hidden bg-slate-950">
+              <div className="relative h-72 overflow-hidden bg-slate-950">
                 <img
                   src={photo.src}
                   alt={photo.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#070c1e] via-transparent to-transparent opacity-80"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#070c1e] via-transparent to-transparent opacity-85"></div>
 
-                <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 border border-cyan-500/40 text-[11px] font-mono font-bold text-cyan-300 backdrop-blur-md">
+                <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/85 border border-cyan-400 text-xs font-mono font-bold text-cyan-300 backdrop-blur-md shadow-lg">
                   {photo.badge}
                 </span>
               </div>
 
-              <div className="p-5 space-y-2">
-                <h4 className="text-base font-bold text-slate-100 group-hover:text-cyan-300 transition-colors">
+              <div className="p-6 space-y-2">
+                <h4 className="text-lg font-extrabold text-slate-100 group-hover:text-cyan-300 transition-colors">
                   {photo.title}
                 </h4>
-                <p className="text-xs text-cyan-400 font-mono font-medium">{photo.role}</p>
-                <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">{photo.caption}</p>
+                <p className="text-xs text-cyan-400 font-mono font-semibold">{photo.role}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{photo.caption}</p>
               </div>
             </div>
           ))}
+        </div>
+      </div>
 
-          {/* 3 Reserved Slots for Upcoming Photos */}
-          {reservedSlots.map((slot) => (
+      {/* ─── SECTION 2: 5 INDIVIDUAL TEAM MEMBERS (RAVINDU, RANIRU, NESANDU, PAWANI, JANANI) ─── */}
+      <div className="space-y-6">
+        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2.5">
+            <Users className="w-5 h-5 text-purple-400" />
+            <span>FUSION 5 Project Team Members</span>
+          </h3>
+          <span className="text-xs font-mono text-purple-300 font-bold bg-purple-950 px-3 py-1 rounded-full border border-purple-500/40">
+            5 Engineers
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {teamMembers.map((member) => (
             <div
-              key={slot.slotNum}
-              className="group relative rounded-3xl border-2 border-dashed border-cyan-500/30 bg-[#050814]/60 p-8 flex flex-col items-center justify-center text-center space-y-4 transition-all duration-300 hover:border-cyan-400 hover:bg-[#070d22]/80 shadow-inner min-h-[340px]"
+              key={member.id}
+              onClick={() => member.src && setSelectedPhoto({ src: member.src, title: member.name, caption: member.caption })}
+              className={`group relative overflow-hidden rounded-3xl border backdrop-blur-2xl transition-all duration-300 ${
+                member.hasCustomImage
+                  ? 'border-slate-800 bg-[#070c1e]/90 hover:-translate-y-1.5 hover:border-cyan-400 hover:shadow-[0_15px_35px_rgba(0,243,255,0.2)] cursor-pointer'
+                  : 'border-2 border-dashed border-cyan-500/30 bg-[#050814]/70 hover:border-cyan-400 hover:bg-[#070d22]/90'
+              } p-6 flex flex-col justify-between space-y-4`}
             >
-              <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all shadow-[0_0_15px_rgba(0,243,255,0.2)]">
-                <UploadCloud className="w-7 h-7" />
-              </div>
+              {member.hasCustomImage ? (
+                <div className="relative h-64 overflow-hidden rounded-2xl bg-slate-950 mb-2">
+                  <img
+                    src={member.src}
+                    alt={member.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070c1e] via-transparent to-transparent opacity-70"></div>
+                  <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/85 border border-cyan-400 text-[11px] font-mono font-bold text-cyan-300 backdrop-blur-md">
+                    {member.badge}
+                  </span>
+                </div>
+              ) : (
+                <div className="relative h-48 rounded-2xl border border-cyan-500/20 bg-slate-950/80 flex flex-col items-center justify-center p-4 text-center space-y-2">
+                  <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                    <UploadCloud className="w-6 h-6" />
+                  </div>
+                  <span className="text-xs font-mono text-cyan-300 font-bold">Photo Space Reserved</span>
+                  <p className="text-[11px] text-slate-400">Upload upcoming photo for {member.name}</p>
+                </div>
+              )}
 
-              <div className="space-y-1">
-                <span className="px-2.5 py-1 rounded-full bg-cyan-950 border border-cyan-500/40 text-[10px] font-mono text-bold text-cyan-300">
-                  {slot.title}
-                </span>
-                <h4 className="text-sm font-bold text-slate-300 pt-2">{slot.hint}</h4>
-                <p className="text-xs text-slate-400 max-w-xs leading-relaxed">
-                  Ready to accept upcoming team photo upload. Space pre-allocated in high-res grid layout.
-                </p>
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xl font-extrabold text-slate-100 group-hover:text-cyan-300 transition-colors">
+                    {member.name}
+                  </h4>
+                  <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300 font-semibold">
+                    {member.badge}
+                  </span>
+                </div>
+
+                <p className="text-xs text-cyan-400 font-mono font-medium">{member.role}</p>
+                <p className="text-xs text-slate-300 leading-relaxed pt-1">{member.caption}</p>
               </div>
             </div>
           ))}
-
         </div>
       </div>
 
