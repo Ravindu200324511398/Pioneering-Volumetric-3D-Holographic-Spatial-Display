@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { UploadCloud, Download, FileCode, Check, Image as ImageIcon, Video, Sparkles, Filter, Eye, Sliders, ArrowRight, Disc, Layers, Clock, Type, Play, RefreshCw } from 'lucide-react';
 import { IMAGE_PRESETS, VIDEO_PRESETS } from '../data/presetData';
+import uomLogo from '../assets/uom.png';
 
 export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualMode, distanceCm: propDistanceCm }) {
   const [sourceMode, setSourceMode] = useState('image'); // 'image' | 'clock' | 'text'
@@ -42,7 +43,7 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
   const [clockScale, setClockScale] = useState(80);
   const [currentTime, setCurrentTime] = useState(new Date());
 
-  const [selectedImageSrc, setSelectedImageSrc] = useState(null);
+  const [selectedImageSrc, setSelectedImageSrc] = useState(uomLogo);
   const [statusMessage, setStatusMessage] = useState('');
   const fileInputRef = useRef(null);
   const canvasRef = useRef(null);
@@ -53,11 +54,6 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
       setCurrentTime(new Date());
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
-
-  // Default to University of Moratuwa emblem or sample image
-  useEffect(() => {
-    setSelectedImageSrc('/Fusion5_POV_Images/uom.png');
   }, []);
 
   const handleFileUpload = (e) => {
@@ -91,7 +87,9 @@ export default function MediaStudio({ setSelectedPreset, isDualMode: propIsDualM
     if (sourceMode === 'image') {
       if (!selectedImageSrc) return;
       const img = new Image();
-      img.crossOrigin = 'anonymous';
+      if (typeof selectedImageSrc === 'string' && selectedImageSrc.startsWith('http')) {
+        img.crossOrigin = 'anonymous';
+      }
       img.src = selectedImageSrc;
       img.onload = () => {
         ctx.save();
